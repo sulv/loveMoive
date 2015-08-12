@@ -1,10 +1,15 @@
+
 var koa = require('koa');
 var app = koa();
+var path = require("path");
 var config = require('./config.js');
-app.use()
+var static = require("koa-static");
+
+app.use(static(path.join(__dirname, '../public')));
+
 app.listen(config.port, function(){
     console.log('app listened on ' + config.port);
 })
-process.on("uncaughtException", function(err){
-    console.log(err);
-})
+app.on('error', function(err, ctx){
+    log.error('server error', err, ctx);
+});

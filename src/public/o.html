@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>显</title>
+    <meta charset="utf-8" />
+
+    <style type="text/css">
+
+        *{
+            margin: 0;padding: 0;
+        }
+        body{
+            font-family: "Microsoft Yahei";
+            -webkit-font-smoothing: antialiased;
+            background: #fff;
+            color: #555;
+            font-size: 14px;
+        }
+        @font-face{
+            font-family: myFont;
+            src: url(../font/MyriadPro-Light.otf);
+        }
+
+        /* 舞台背景 */
+        .wrap {
+            width: 100%; height: 600px;
+            background-color: #333;
+            position: absolute; top: 50%;
+            margin-top: -300px;
+        }
+
+        /* photo */
+        .photo {
+            /* 下面三种代码都可，第三种可以随意调整 padding 而不用担心宽高 */
+
+            /*width: 260px; height: 320px;*/
+            /*float: left;*/
+            display: inline-block;
+        }
+
+        /* .side：用来调整内边距 */
+        .photo .side {
+            background-color: #eee;
+            padding: 20px;
+        }
+
+        /* 图片正面 */
+        .photo .side_font .image {
+            width: 220px; height: 250px;
+            overflow: hidden;
+        }
+        .photo .side_font .image  img {
+            width: 100%;
+        }
+        .photo .side_font .caption {
+            font-size: 16px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        /* 图片反面 */
+        .photo .side_back {
+            display: none;
+        }
+        .photo-center{
+            left: 50%;
+
+        }
+    </style>
+
+    <script type="text/javascript">
+    </script>
+
+</head>
+
+<body>
+
+<!-- 舞台背景 -->
+<div class="wrap">
+
+    <!-- photo -->
+    <div class="photo">
+        <!-- 图片正面 -->
+        <div class="side side_font">
+            <p class="image"><img src="imgs/test.jpg" alt="图片" /></p>
+            <p class="caption">麦兜我和我妈妈</p>
+        </div>
+
+        <!-- 图片背面 -->
+        <div class="side side_back">
+            <p class="desc">描述信息</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
