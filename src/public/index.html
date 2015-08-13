@@ -14,12 +14,12 @@
             color: #555;
             font-family: 'Avenir Next', 'Lantinghei SC';
             font-size: 14px;
-            -webkit-font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased;//字体平滑
         }
 
         .love {
             width: 100%;
-            height: 600px;
+            height: 650px;
             position: absolute;
             top: 50%;
             margin-top: -300px;
@@ -267,16 +267,16 @@
         var range = rangeXY();
         for(var s in photo_left){
             var photo = photo_left[s];
-            photo.style.left = _.random(range.left.x[0], range.left.x[1]) + 'px';
-            photo.style.top =  _.random(range.left.y[0], range.left.y[1]) + 'px';
-            photo.style['-webkit-transform'] = 'rotate('+ _.random(-30, 30)+'deg) scale(1)';
+//            photo.style.left = _.random(range.left.x[0], range.left.x[1]) + 'px';
+//            photo.style.top =  _.random(range.left.y[0], range.left.y[1]) + 'px';
+            photo.style['-webkit-transform'] = 'rotate('+ _.random(-45, 45)+'deg) scale(1)';
         }
 
         for(var s in photo_right){
             var photo = photo_right[s];
-            photo.style.left = _.random(range.right.x[0], range.right.x[1]) + 'px';
-            photo.style.top =  _.random(range.right.y[0], range.right.y[1]) + 'px';
-            photo.style['-webkit-transform'] = 'rotate('+ _.random(-150, 150)+'deg) scale(1)';
+//            photo.style.left = _.random(range.right.x[0], range.right.x[1]) + 'px';
+//            photo.style.top =  _.random(range.right.y[0], range.right.y[1]) + 'px';
+            photo.style['-webkit-transform'] = 'rotate('+ _.random(-45, 45)+'deg) scale(1)';
         }
 
         var navs = g(".i");
@@ -293,7 +293,7 @@
         var loveW = g("#love").clientWidth;
         var photoH = g(".photo")[0].clientHeight;
         var photoW = g(".photo")[0].clientWidth;
-        var leftXMin = -photoW/2;
+        var leftXMin = 0;
         var leftXMax = loveW/2 - photoW;
         var yMin = -photoH;
         var yMax = loveH;
