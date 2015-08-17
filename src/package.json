@@ -1,0 +1,28 @@
+{
+  "name": "loveMovie",
+  "version": "0.0.1",
+  "description": "this is a website for test",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sulv/loveMoive.git"
+  },
+  "keywords": [
+    "movie",
+    "love"
+  ],
+  "author": "du",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sulv/loveMoive/issues"
+  },
+  "homepage": "https://github.com/sulv/loveMoive",
+  "dependencies": {
+    "koa": "^0.21.0",
+    "koa-favicon": "^1.2.0",
+    "koa-static": "^1.4.9"
+  }
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>爱电影</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pop.scss">
+    <script type="text/javascript" src="lodash.js"></script>
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+</head>
+<body onselectstart="return false;">
+<div class="top">
+    <h1>爱电影</h1>
+    <a href="javascript:void(0)" class="sign" id="signup" onclick="">注册</a>
+    <a href="javascript:void(0)" class="sign" id="login" onclick="">登录</a>
+</div>
+<div class="header">
+
+</div>
+<div class="pop_tab">
+    <div id="title" class="title" dt-data="登录您的账号">登录您的账号</div>
+    <div class="tab_box">
+        <div id="sigin_in" style="display: block;">
+            <div class="sign-in form">
+                <form class="formLogin">
+                    <div class="item account">
+                        <input name="account" type="text" placeholder="用户名/手机/邮箱">
+                    </div>
+                    <div class="item account">
+                        <input name="password" type="password" placeholder="密码（至少6位任意字符组合）">
+                    </div>
+                    <div class="other">
+                        <span class="checkbox"><input type="checkbox" checked="checked"> 下次自动登录</span>
+                        <a class="findpassword" target="_block" href="http://dev.account.smartstudy.com/find?smartRedirect=http%3A%2F%2F">忘记密码？</a>
+                    </div>
+                    <input type="submit" value="立即登录学习" dt-data="立即登录学习">
+                    <div class="third">
+                        <span>使用第三方账号登录：</span>
+                        <a class="icon icon-baidu" href="http://dev.account.smartstudy.com/third/authorize?type=baidu&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                        <a class="icon icon-qq" href="http://dev.account.smartstudy.com/third/authorize?type=qq&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                        <a class="icon icon-weibo" href="http://dev.account.smartstudy.com/third/authorize?type=weibo&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="sigin_up" class="hide" style="display: none;">
+            <div class="register form">
+                <form class="formRegister">
+                    <div class="item account">
+                        <input name="phone" type="text" placeholder="请填写手机号码">
+                    </div>
+                    <div class="item account">
+                        <input name="password" type="password" placeholder="请填写密码">
+                    </div>
+                    <div class="item captcha">
+                        <input name="code" type="text" placeholder="填写验证码">
+                        <span class="get-code"><img src="http://dev.account.smartstudy.com/captcha?bg=1" alt="验证码" height="20" align="bottom" style="cursor:pointer;" title="看不清可单击图片刷新" onclick="this.src='http://dev.account.smartstudy.com/captcha?bg='+Math.random();"></span>
+                    </div>
+                    <div class="item captcha">
+                        <input name="captchaPhone" type="text" placeholder="填写激活码">
+                        <span class="get-captcha">获取</span>
+                    </div>
+                    <input type="submit" value="立即注册" dt-data="立即注册学习">
+                    <div class="third">
+                        <span>使用第三方账号登录：</span>
+                        <a class="icon icon-baidu" href="http://dev.account.smartstudy.com/third/authorize?type=baidu&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                        <a class="icon icon-qq" href="http://dev.account.smartstudy.com/third/authorize?type=qq&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                        <a class="icon icon-weibo" href="http://dev.account.smartstudy.com/third/authorize?type=weibo&amp;source=localhost:3001&amp;smartRedirect=http%3A%2F%2Fwwww.smartstudy.com%2F"></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="love" id="love" >
+    <div class="photo  photo_front" onclick="turn(this)" id="photo_{{index}}">
+        <div class="photo-wrap">
+            <div class="side side-front">
+                <p class="image">
+                    <img src="./imgs/{{img}}" alt="test"/>
+                </p>
+
+                <p class="caption">{{caption}}</p>
+            </div>
+            <div class="side side-back">
+                <p class="desc">{{desc}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function g(selector){
+        var method = selector.substr(0,1) === "." ? "getElementsByClassName" : "getElementById";
+        return document[method](selector.substr(1));
+    }
+
+    function addPhoto(){
+        var template = g("#love").innerHTML;
+        var html = [];
+        var nav = [];
+        for (var s in data){
+            var _html = template
+                    .replace('{{index}}', s)
+                    .replace('{{img}}', data[s].href)
+                    .replace('{{caption}}', data[s].name)
+                    .replace('{{desc}}', data[s].desc)
+            html.push(_html);
+            nav.push('<span id="nav_'+ s +'" onclick="turn( g(\'#photo_'+ s +
+            '\'))" class="i">&nbsp;</span>');
+        }
+        html.push('<div class="nav">' + nav.join('') + '</div>');
+        g("#love").innerHTML = html.join('');
+        rsort(_.random(0,7));
+    }
+
+    addPhoto();
+    function turn(elem){
+        var cls = elem.className;
+        var n = elem.id.split('_')[1];
+        if (!/photo-center/.test(cls)){
+            return rsort(n);
+        }
+        if(/photo_front/.test(cls)){
+            cls = cls.replace(/photo_front/, 'photo_back');
+            g('#nav_'+n).className += ' i_back';
+        }else {
+            cls = cls.replace(/photo_back/, 'photo_front');
+            g('#nav_'+n).className = g('#nav_'+n).className.replace(/\s*i_back\s*/,' ');
+        }
+        return elem.className = cls;
+    }
+
+    function rsort(n){
+        var _photo = g('.photo');
+        var photos = [];
+        for (var s = 0; s<_photo.length; s++){
+            _photo[s].className = _photo[s].className.replace(/\s*photo-center\s*/,' ');
+            _photo[s].className = _photo[s].className.replace(/\s*photo_front\s*/,' ');
+            _photo[s].className = _photo[s].className.replace(/\s*photo_back\s*/,' ');
+
+            _photo[s].className += 'photo_front';
+            _photo[s].style.left = '';
+            _photo[s].style.top =  '';
+            _photo[s].style['-webkit-transform'] = 'rotate(0deg) scale(1.5)';
+            photos.push(_photo[s]);
+        }
+
+        var centerPhoto = g('#photo_' + n);
+        centerPhoto.className += ' photo-center';
+        photos.splice(n,1);
+
+        //把海报分为两个区域
+        var photo_left = photos.splice(0, Math.ceil(photos.length/2));
+        var photo_right = photos;
+        var range = rangeXY();
+        for(var s in photo_left){
+            var photo = photo_left[s];
+            photo.style.left = _.random(range.left.x[0], range.left.x[1]) + 'px';
+            photo.style.top =  _.random(range.left.y[0], range.left.y[1]) + 'px';
+            photo.style['-webkit-transform'] = 'rotate('+ _.random(-45, 45)+'deg) scale(.8)';
+        }
+
+        for(var s in photo_right){
+            var photo = photo_right[s];
+            photo.style.left = _.random(range.right.x[0], range.right.x[1]) + 'px';
+            photo.style.top =  _.random(range.right.y[0], range.right.y[1]) + 'px';
+            photo.style['-webkit-transform'] = 'rotate('+ _.random(-45, 45)+'deg) scale(.8)';
+        }
+
+        var navs = g(".i");
+        for (var s =0; s <navs.length;s++){
+            navs[s].className = navs[s].className.replace(/\s*i_current\s*/, ' ');
+            navs[s].className = navs[s].className.replace(/\s*i_back\s*/, ' ');
+        }
+        g('#nav_' + n).className += ' i_current';
+    }
+    //todo 计算左右分区的xy值
+    function rangeXY(){
+        var loveH = g("#love").clientHeight;
+        var loveW = g("#love").clientWidth;
+        var photoH = g(".photo")[0].clientHeight;
+        var photoW = g(".photo")[0].clientWidth;
+        var leftXMin = 0;
+        var leftXMax = loveW/2 - photoW;
+        var yMin = 150;
+        var yMax = loveH -150;
+        var rightXMin = photoW/2 + loveW/2 + 150;
+        var rightXMax = loveW ;
+
+        var left = {
+            x: [leftXMin, leftXMax],
+            y: [yMin, yMax]
+        };
+        var right = {
+            x: [rightXMin, rightXMax],
+            y: [yMin, yMax]
+        }
+
+        return {
+            left: left,
+            right: right
+        }
+
+    }
+</script>
+
+</body>
+</html>
